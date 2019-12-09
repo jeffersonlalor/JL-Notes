@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7MV-WW-4Zo">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,7 +53,7 @@
                                         <connections>
                                             <outlet property="date" destination="m2b-9H-url" id="QXe-NN-24m"/>
                                             <outlet property="title" destination="NuX-PT-zJU" id="8JY-EZ-JOZ"/>
-                                            <segue destination="G3j-Qe-ffE" kind="show" id="KA6-f0-iiN"/>
+                                            <segue destination="G3j-Qe-ffE" kind="show" identifier="selectedCell" id="KA6-f0-iiN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -75,7 +75,7 @@
                     <navigationItem key="navigationItem" title="Notes" id="h0b-dq-MCN">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="6hB-bh-X9v">
                             <connections>
-                                <segue destination="63a-6r-qS7" kind="show" id="MwL-VH-eZG"/>
+                                <segue destination="G3j-Qe-ffE" kind="show" identifier="newNote" id="Y4M-SO-TdY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -87,37 +87,48 @@
             </objects>
             <point key="canvasLocation" x="1077.5999999999999" y="126.38680659670166"/>
         </scene>
-        <!--New Note-->
-        <scene sceneID="OTM-eF-efW">
-            <objects>
-                <viewController id="63a-6r-qS7" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="unn-au-PIt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="c63-WL-p8a"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="New Note" id="Ptc-mq-v53"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QZf-3k-iNO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2025" y="-269"/>
-        </scene>
         <!--My Note-->
         <scene sceneID="VHT-3p-9PD">
             <objects>
-                <viewController id="G3j-Qe-ffE" sceneMemberID="viewController">
+                <viewController id="G3j-Qe-ffE" customClass="NoteViewController" customModule="JL_Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bXz-vs-AN7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnJ-5z-sE5">
+                                <rect key="frame" x="16" y="96" width="359" height="571"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
+
+Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
+
+Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
+
+</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gSh-3i-wJa" firstAttribute="bottom" secondItem="tnJ-5z-sE5" secondAttribute="bottom" id="33A-LW-47K"/>
+                            <constraint firstItem="tnJ-5z-sE5" firstAttribute="top" secondItem="gSh-3i-wJa" secondAttribute="top" id="EMM-A8-vX5"/>
+                            <constraint firstItem="tnJ-5z-sE5" firstAttribute="leading" secondItem="gSh-3i-wJa" secondAttribute="leading" constant="16" id="Hpd-dV-gPp"/>
+                            <constraint firstItem="gSh-3i-wJa" firstAttribute="trailing" secondItem="tnJ-5z-sE5" secondAttribute="trailing" id="d9t-bX-bYT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gSh-3i-wJa"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Note" id="tRR-b7-aGE"/>
+                    <navigationItem key="navigationItem" title="My Note" id="tRR-b7-aGE">
+                        <barButtonItem key="rightBarButtonItem" title="Edit Title" id="gtp-7B-dTv"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="text" destination="tnJ-5z-sE5" id="RVf-E5-Emk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ELy-ea-dNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2025" y="403"/>
+            <point key="canvasLocation" x="1993" y="126"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zBM-oC-tLX">
@@ -138,4 +149,7 @@
             <point key="canvasLocation" x="138.40000000000001" y="126.38680659670166"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="KA6-f0-iiN"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -37,6 +37,18 @@ class ViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier != nil else {return}
+        guard let noteViewController = segue.destination as? NoteViewController else {return}
+        
+        if segue.identifier == "newNote" {
+            noteViewController.note = JLNote.init(title: "New Note", date: Date.init(), text: "")
+        } else if segue.identifier == "selectedCell" {
+            guard let index = self.tableView.indexPathForSelectedRow else {return}
+            noteViewController.note = self.myNotes[index.row]
+        }
+    }
 
 }
 

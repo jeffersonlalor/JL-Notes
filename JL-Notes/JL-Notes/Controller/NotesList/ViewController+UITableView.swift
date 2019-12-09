@@ -23,7 +23,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.fill(note: self.myNotes[indexPath.row])
         
         return cell
-        
     }
-    
+        
 }
