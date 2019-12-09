@@ -9,10 +9,8 @@
 import Foundation
 
 
-public struct JLNotes {
+public struct JLNote {
     public var title: String
     public var date: Date
     public var text: String
 }
-
-public var myNotes: [JLNotes] = []
