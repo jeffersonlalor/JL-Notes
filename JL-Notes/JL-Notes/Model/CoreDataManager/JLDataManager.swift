@@ -20,7 +20,7 @@ public struct JLDataManager: JLGenericDAO {
     public func add(newEntity: JLNote) throws {
         let noteMO = NoteMO.init(context: self.viewContext)
         
-        noteMO.id = Int16( newEntity.id )
+        noteMO.id = newEntity.id
         noteMO.date = newEntity.date
         noteMO.title = newEntity.title
         noteMO.text = newEntity.text
@@ -40,7 +40,7 @@ public struct JLDataManager: JLGenericDAO {
         var notes: [JLNote] = []
         
         for note in notesMO {
-            let newNote = JLNote.init(id: Int(note.id), title: note.title ?? "", date: note.date ?? Date.init(), text: note.text ?? "", typeNote: .existingNote)
+            let newNote = JLNote.init(id: note.id ?? UUID.init(), title: note.title ?? "", date: note.date ?? Date.init(), text: note.text ?? "", typeNote: .existingNote)
             
             notes.append(newNote)
         }
@@ -80,7 +80,18 @@ public struct JLDataManager: JLGenericDAO {
     }
     
     public func delete(entity: JLNote) throws {
-        throw JLCoreDataError.internalError(description: "Not implemented")
+        let predicate = NSPredicate.init(format: "id = %@", "\(entity.id)")
+        guard let notesMO = try self.fetchObjects(entityName: self.entityName, predicate: predicate) as? [NoteMO] else {return}
+        
+        guard notesMO.count == 1 else {return}
+
+        self.viewContext.delete(notesMO[0])
+        
+        do{
+            try JLCoreDataManager.shared.saveContext()
+        } catch {
+            throw JLCoreDataError.internalError(description: "Delete don't saved")
+        }
     }
     
 }

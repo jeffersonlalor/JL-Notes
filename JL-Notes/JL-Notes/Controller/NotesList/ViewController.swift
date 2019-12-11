@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         self.tableView.delegate = self
     }
     
-    private func fetchNotes() {
+    public func fetchNotes() {
         do {
             self.notes = try JLDataManager.shared.fetchAll()
         } catch {
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         guard let noteViewController = segue.destination as? JLNoteViewController else {return}
         
         if segue.identifier == "newNote" {
-            noteViewController.note = JLNote.init(id: self.notes.count, title: "New Note", date: Date.init(), text: "", typeNote: .newNote)
+            noteViewController.note = JLNote.init(id: UUID.init(), title: "New Note", date: Date.init(), text: "", typeNote: .newNote)
         } else if segue.identifier == "selectedCell" {
             guard let index = self.tableView.indexPathForSelectedRow else {return}
             noteViewController.note = self.notes[index.row]

@@ -14,7 +14,7 @@ public enum TypeNote {
 }
 
 public struct JLNote {
-    public var id: Int
+    public var id: UUID
     public var title: String
     public var date: Date
     public var text: String

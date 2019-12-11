@@ -24,5 +24,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            try? JLDataManager.shared.delete(entity: self.notes[indexPath.row])
+            self.fetchNotes()
+            self.tableView.reloadData()
+        }
+    }
         
 }

@@ -66,6 +66,7 @@ public class JLNoteViewController: UIViewController {
         }
         alert.addAction(cancelAction)
         alert.addAction(okAction)
+        alert.view.layoutIfNeeded()
         
         present(alert, animated: true, completion: nil)
     }
