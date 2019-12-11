@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		84108DDB239ED940006AADB8 /* JLNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84108DDA239ED940006AADB8 /* JLNoteViewController.swift */; };
+		84AF0F2323A11F5C008399AA /* JLCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF0F2223A11F5C008399AA /* JLCoreDataManager.swift */; };
+		84AF0F2623A11FA8008399AA /* JL-Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84AF0F2423A11FA8008399AA /* JL-Notes.xcdatamodeld */; };
+		84AF0F4B23A126C7008399AA /* JLGenericDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF0F4A23A126C7008399AA /* JLGenericDAO.swift */; };
+		84AF0F4D23A12D82008399AA /* JLDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF0F4C23A12D82008399AA /* JLDataManager.swift */; };
 		84ED67BB239EBCA1005838D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED67BA239EBCA1005838D6 /* AppDelegate.swift */; };
 		84ED67BD239EBCA1005838D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED67BC239EBCA1005838D6 /* SceneDelegate.swift */; };
 		84ED67BF239EBCA1005838D6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED67BE239EBCA1005838D6 /* ViewController.swift */; };
@@ -21,6 +25,10 @@
 
 /* Begin PBXFileReference section */
 		84108DDA239ED940006AADB8 /* JLNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLNoteViewController.swift; sourceTree = "<group>"; };
+		84AF0F2223A11F5C008399AA /* JLCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLCoreDataManager.swift; sourceTree = "<group>"; };
+		84AF0F2523A11FA8008399AA /* ManagerData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ManagerData.xcdatamodel; sourceTree = "<group>"; };
+		84AF0F4A23A126C7008399AA /* JLGenericDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLGenericDAO.swift; sourceTree = "<group>"; };
+		84AF0F4C23A12D82008399AA /* JLDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLDataManager.swift; sourceTree = "<group>"; };
 		84ED67B7239EBCA1005838D6 /* JL-Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JL-Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84ED67BA239EBCA1005838D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84ED67BC239EBCA1005838D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +88,24 @@
 			path = Note;
 			sourceTree = "<group>";
 		};
+		84AF0F2023A11F15008399AA /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				84ED67D1239EBDF7005838D6 /* JLNote.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		84AF0F2123A11F20008399AA /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				84AF0F2223A11F5C008399AA /* JLCoreDataManager.swift */,
+				84AF0F4C23A12D82008399AA /* JLDataManager.swift */,
+				84AF0F4A23A126C7008399AA /* JLGenericDAO.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
 		84ED67AE239EBCA1005838D6 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +125,7 @@
 		84ED67B9239EBCA1005838D6 /* JL-Notes */ = {
 			isa = PBXGroup;
 			children = (
+				84ED67D3239EBE1F005838D6 /* Settings */,
 				84ED67D0239EBDB5005838D6 /* Model */,
 				84ED67CF239EBDB2005838D6 /* View */,
 				84ED67CE239EBDAF005838D6 /* Controller */,
@@ -112,7 +139,6 @@
 			children = (
 				84A32D82239ED91C00525A93 /* Note */,
 				84A32D81239ED8EC00525A93 /* NotesList */,
-				84ED67D3239EBE1F005838D6 /* Default */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -129,18 +155,20 @@
 		84ED67D0239EBDB5005838D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				84ED67D1239EBDF7005838D6 /* JLNote.swift */,
+				84AF0F2423A11FA8008399AA /* JL-Notes.xcdatamodeld */,
+				84AF0F2123A11F20008399AA /* CoreDataManager */,
+				84AF0F2023A11F15008399AA /* Structs */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		84ED67D3239EBE1F005838D6 /* Default */ = {
+		84ED67D3239EBE1F005838D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				84ED67BA239EBCA1005838D6 /* AppDelegate.swift */,
 				84ED67BC239EBCA1005838D6 /* SceneDelegate.swift */,
 			);
-			path = Default;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,9 +245,13 @@
 				84108DDB239ED940006AADB8 /* JLNoteViewController.swift in Sources */,
 				84ED67BF239EBCA1005838D6 /* ViewController.swift in Sources */,
 				84ED67BB239EBCA1005838D6 /* AppDelegate.swift in Sources */,
+				84AF0F4D23A12D82008399AA /* JLDataManager.swift in Sources */,
+				84AF0F2623A11FA8008399AA /* JL-Notes.xcdatamodeld in Sources */,
 				84ED67BD239EBCA1005838D6 /* SceneDelegate.swift in Sources */,
 				84ED67D7239EC61B005838D6 /* JLTableViewCell.swift in Sources */,
+				84AF0F2323A11F5C008399AA /* JLCoreDataManager.swift in Sources */,
 				84ED67D5239EC56E005838D6 /* ViewController+UITableView.swift in Sources */,
+				84AF0F4B23A126C7008399AA /* JLGenericDAO.swift in Sources */,
 				84ED67D2239EBDF7005838D6 /* JLNote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +450,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84AF0F2423A11FA8008399AA /* JL-Notes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84AF0F2523A11FA8008399AA /* ManagerData.xcdatamodel */,
+			);
+			currentVersion = 84AF0F2523A11FA8008399AA /* ManagerData.xcdatamodel */;
+			path = "JL-Notes.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84ED67AF239EBCA1005838D6 /* Project object */;
 }

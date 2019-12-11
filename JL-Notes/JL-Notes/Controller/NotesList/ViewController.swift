@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     public let cellId = "JLTableViewCell"
+    public var notes: [JLNote] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
+            self.fetchNotes()
             self.tableView.reloadData()
         }
     }
@@ -31,15 +33,19 @@ class ViewController: UIViewController {
         self.tableView.delegate = self
     }
     
+    private func fetchNotes() {
+        self.notes = JLDataManager.shared.fetchAll()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier != nil else {return}
         guard let noteViewController = segue.destination as? JLNoteViewController else {return}
         
         if segue.identifier == "newNote" {
-            noteViewController.note = JLNote.init(id: myNotes.count, title: "New Note", date: Date.init(), text: "", typeNote: .newNote)
+            noteViewController.note = JLNote.init(id: self.notes.count, title: "New Note", date: Date.init(), text: "", typeNote: .newNote)
         } else if segue.identifier == "selectedCell" {
             guard let index = self.tableView.indexPathForSelectedRow else {return}
-            noteViewController.note = myNotes[index.row]
+            noteViewController.note = self.notes[index.row]
         }
     }
 

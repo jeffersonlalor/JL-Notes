@@ -13,14 +13,14 @@ import UIKit
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myNotes.count
+        return self.notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as? JLTableViewCell else { return UITableViewCell.init() }
         
-        cell.fill(note: myNotes[indexPath.row])
+        cell.fill(note: self.notes[indexPath.row])
         
         return cell
     }
