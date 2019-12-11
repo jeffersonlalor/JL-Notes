@@ -35,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        JLCoreDataManager.shared.saveContext()
+        try? JLCoreDataManager.shared.saveContext()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        JLCoreDataManager.shared.saveContext()
+        try? JLCoreDataManager.shared.saveContext()
     }
     
 }

@@ -17,8 +17,8 @@ public enum JLCoreDataError: Error {
 public protocol JLGenericDAO {
     associatedtype T
     
-    func add(newEntity: T)
-    func fetchAll() -> [T]
-    func update(entity: T)
-    func delete(entity: T)
+    func add(newEntity: T) throws
+    func fetchAll() throws -> [T]
+    func update(entity: T) throws
+    func delete(entity: T) throws
 }

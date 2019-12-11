@@ -34,7 +34,11 @@ class ViewController: UIViewController {
     }
     
     private func fetchNotes() {
-        self.notes = JLDataManager.shared.fetchAll()
+        do {
+            self.notes = try JLDataManager.shared.fetchAll()
+        } catch {
+            self.notes = []
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

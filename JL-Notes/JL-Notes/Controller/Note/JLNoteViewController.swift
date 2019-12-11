@@ -21,8 +21,7 @@ public class JLNoteViewController: UIViewController {
             }
             
             guard self.note.typeNote == .existingNote else {return}
-            
-            #warning("update existent")
+            try? JLDataManager.shared.update(entity: self.note)
         }
     }
 
@@ -38,7 +37,7 @@ public class JLNoteViewController: UIViewController {
         guard self.note.typeNote == .newNote else {return}
         
         self.note.typeNote = .existingNote
-        JLDataManager.shared.add(newEntity: self.note)
+        try? JLDataManager.shared.add(newEntity: self.note)
     }
     
     

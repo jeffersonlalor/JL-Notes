@@ -17,7 +17,7 @@ public struct JLDataManager: JLGenericDAO {
     public typealias T = JLNote
 
     
-    public func add(newEntity: JLNote) {
+    public func add(newEntity: JLNote) throws {
         let noteMO = NoteMO.init(context: self.viewContext)
         
         noteMO.id = Int16( newEntity.id )
@@ -25,13 +25,16 @@ public struct JLDataManager: JLGenericDAO {
         noteMO.title = newEntity.title
         noteMO.text = newEntity.text
         
-        JLCoreDataManager.shared.saveContext()
+        do {
+            try JLCoreDataManager.shared.saveContext()
+        } catch {
+            throw JLCoreDataError.internalError(description: "New note dont saved")
+        }
     }
     
-    public func fetchAll() -> [JLNote] {
-        guard let notesMO = self.fetchObjects(entityName: self.entityName) as? [NoteMO] else {
-            JLCoreDataError.invalidData(description: "Error converting to [NSManagedObject]")
-            return []
+    public func fetchAll() throws -> [JLNote] {
+        guard let notesMO = try self.fetchObjects(entityName: self.entityName, predicate: nil) as? [NoteMO] else {
+            throw JLCoreDataError.invalidData(description: "Error converting to [NSManagedObject]")
         }
         
         var notes: [JLNote] = []
@@ -45,24 +48,39 @@ public struct JLDataManager: JLGenericDAO {
         return notes
     }
     
-    private func fetchObjects(entityName: String) -> [Any] {
-        var fetchRequest: [Any] = []
-        
+    private func fetchObjects(entityName: String, predicate: NSPredicate?) throws -> [Any] {
+        var result: [Any] = []
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
+        fetchRequest.predicate = predicate
+
         do {
-            fetchRequest = try self.viewContext.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName))
+            result = try self.viewContext.fetch(fetchRequest)
         } catch {
-            JLCoreDataError.internalError(description: error.localizedDescription)
+            print(error.localizedDescription)
+            throw JLCoreDataError.internalError(description: error.localizedDescription)
         }
         
-        return fetchRequest
+        return result
     }
     
-    public func update(entity: JLNote) {
-        JLCoreDataError.internalError(description: "Not implemented")
+    public func update(entity: JLNote) throws {
+        let predicate = NSPredicate.init(format: "id = %@", "\(entity.id)")
+        guard let notesMO = try self.fetchObjects(entityName: self.entityName, predicate: predicate) as? [NoteMO] else {return}
+        
+        guard notesMO.count == 1 else {return}
+        
+        notesMO[0].title = entity.title
+        notesMO[0].text = entity.text
+        
+        do{
+            try JLCoreDataManager.shared.saveContext()
+        } catch {
+            throw JLCoreDataError.internalError(description: "Update don't saved")
+        }
     }
     
-    public func delete(entity: JLNote) {
-        JLCoreDataError.internalError(description: "Not implemented")
+    public func delete(entity: JLNote) throws {
+        throw JLCoreDataError.internalError(description: "Not implemented")
     }
     
 }

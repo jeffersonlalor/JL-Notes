@@ -24,16 +24,16 @@ public struct JLCoreDataManager {
     public func load() {
         self.persistentContainer.loadPersistentStores { (storeDescription, error) in
             guard let erro = error else {return}
-            JLCoreDataError.internalError(description: erro.localizedDescription)
+            print(erro.localizedDescription)
         }
     }
     
-    public func saveContext () {
+    public func saveContext() throws {
         if self.viewContext.hasChanges {
             do {
                 try self.viewContext.save()
             } catch {
-                JLCoreDataError.internalError(description: error.localizedDescription)
+                throw JLCoreDataError.internalError(description: error.localizedDescription)
             }
         }
     }
