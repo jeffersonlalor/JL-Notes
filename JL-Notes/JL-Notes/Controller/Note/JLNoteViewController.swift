@@ -24,11 +24,14 @@ public class JLNoteViewController: UIViewController {
             try? JLDataManager.shared.update(entity: self.note)
         }
     }
+    
 
     public override func viewDidLoad() {
         super.viewDidLoad()
 
         self.fill()
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     public override func viewDidDisappear(_ animated: Bool) {
@@ -71,4 +74,22 @@ public class JLNoteViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            text.contentInset = .zero
+        } else {
+            text.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        text.scrollIndicatorInsets = text.contentInset
+
+        let selectedRange = text.selectedRange
+        text.scrollRangeToVisible(selectedRange)
+    }
+    
 }
