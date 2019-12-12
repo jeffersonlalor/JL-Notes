@@ -17,7 +17,10 @@ public class JLTableViewCell: UITableViewCell {
     
     
     public func fill(note: JLNote) {
+        let dateFormat = DateFormatter.init()
+        dateFormat.dateFormat = "dd MMMM, HH:mm"
+        
         self.title.text = note.title
-        self.date.text = "\(note.date)"
+        self.date.text = dateFormat.string(from: note.date)
     }
 }
