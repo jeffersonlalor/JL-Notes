@@ -66,7 +66,8 @@ public class JLNoteViewController: UIViewController {
         
         alert.addTextField { (textField) in
             textField.autocorrectionType = .yes
-            textField.placeholder = self.note.title
+            textField.clearButtonMode = .whileEditing
+            textField.text = self.note.title
         }
         alert.addAction(cancelAction)
         alert.addAction(okAction)
