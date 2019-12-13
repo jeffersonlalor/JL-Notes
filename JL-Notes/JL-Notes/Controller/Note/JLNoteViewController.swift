@@ -35,6 +35,13 @@ public class JLNoteViewController: UIViewController {
     }
     
     public override func viewDidDisappear(_ animated: Bool) {
+        guard !self.text.text.isEmpty else {
+            if self.note.typeNote == .existingNote {
+                try? JLDataManager.shared.delete(entity: self.note)
+            }
+            
+            return
+        }
         self.note.text = self.text.text
 
         guard self.note.typeNote == .newNote else {return}
