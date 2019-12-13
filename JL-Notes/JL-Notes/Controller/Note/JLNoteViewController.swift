@@ -52,7 +52,7 @@ public class JLNoteViewController: UIViewController {
     
     
     @IBAction func editTitle(_ sender: Any) {
-        self.showEditTitleAlert(title: "Edit Title", message: nil)
+        self.showEditTitleAlert(title: NSLocalizedString("Edit Title", comment: "Editar Título"), message: nil)
     }
     
     private func fill() {
@@ -63,7 +63,7 @@ public class JLNoteViewController: UIViewController {
     private func showEditTitleAlert(title: String, message: String?) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction.init(title: NSLocalizedString("Cancel", comment: "Cancelar"), style: .default, handler: nil)
         let okAction = UIAlertAction.init(title: "Ok", style: .default) { [unowned alert] _ in
             guard let textField = alert.textFields else {return}
             guard let newTitle = textField[0].text else {return}
